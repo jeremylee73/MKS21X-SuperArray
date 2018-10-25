@@ -44,4 +44,13 @@ public class SuperArray {
     ans = ans + array[array.length-1] + "]";
     return ans;
   }
+
+  public String get(int i) {
+    if (i < 0 || i >= size) {
+      return null;
+    }
+    return array[i];
+  }
+
+  
 }
