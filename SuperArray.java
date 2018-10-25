@@ -35,4 +35,13 @@ public class SuperArray {
     ans = ans + array[size-1] + "]";
     return ans;
   }
+
+  public String toStringDebug() {
+    String ans = "[";
+    for (int i=0; i<array.length-1;i++) {
+      ans = ans + array[i] + ",";
+    }
+    ans = ans + array[array.length-1] + "]";
+    return ans;
+  }
 }
