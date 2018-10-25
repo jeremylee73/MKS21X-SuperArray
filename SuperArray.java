@@ -67,7 +67,6 @@ public class SuperArray {
       newArray[i] = array[i];
     }
     array = newArray;
-    size = array.length*2;
   }
 
   public boolean contains(String target) {
@@ -96,5 +95,16 @@ public class SuperArray {
     }
     return -1;
   }
-  
+
+  public void add(int index, String a) {
+    String[] ans = new String[array.length];
+    for (int i=0; i<index; i++) {
+      ans[i] = array[i];
+    }
+    ans[index] = a;
+    for (int i=index+1; i<size; i++) {
+      ans[i] = array[i-1];
+    }
+    array = ans;
+  }
 }
