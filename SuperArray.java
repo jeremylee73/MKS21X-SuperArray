@@ -19,6 +19,13 @@ public class SuperArray {
     return false;
   }
 
-  
+  public boolean add(String a) {
+    if (array[array.length-1]==null) {
+      array[size-1] = a;
+      return true;
+    }
+    return false;
+  }
 
+  
 }
