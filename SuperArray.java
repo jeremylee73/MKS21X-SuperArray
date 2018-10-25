@@ -52,5 +52,14 @@ public class SuperArray {
     return array[i];
   }
 
+  public String set(int i, String a) {
+    if (i < 0 || i >= size) {
+      return null;
+    }
+    String original = array[i];
+    array[i] = a;
+    return original;
+  }
+
   
 }
