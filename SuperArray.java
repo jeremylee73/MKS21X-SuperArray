@@ -69,4 +69,15 @@ public class SuperArray {
     array = newArray;
     size = array.length*2;
   }
+
+  public boolean contains(String target) {
+    for (int i=0; i<size; i++) {
+      if (array[i].equals(target)) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  
 }
