@@ -27,5 +27,12 @@ public class SuperArray {
     return false;
   }
 
-  
+  public String toString() {
+    String ans = "[";
+    for (int i=0; i<size-1;i++) {
+      ans = ans + array[i] + ",";
+    }
+    ans = ans + array[size-1] + "]";
+    return ans;
+  }
 }
