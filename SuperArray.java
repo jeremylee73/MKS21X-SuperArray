@@ -12,7 +12,7 @@ public class SuperArray {
     size = 0;
   }
 
-  private boolean isEmpty() {
+  public boolean isEmpty() {
     if (size == 0) {
       return true;
     }
@@ -61,5 +61,12 @@ public class SuperArray {
     return original;
   }
 
-  
+  private void resize() {
+    String[] newArray = new String[array.length*2];
+    for (int i=0; i<size; i++) {
+      newArray[i] = array[i];
+    }
+    array = newArray;
+    size = array.length*2;
+  }
 }
