@@ -79,5 +79,22 @@ public class SuperArray {
     return false;
   }
 
+  public int indexOf(String target) {
+    for (int i=0; i<size; i++) {
+      if (array[i].equals(target)) {
+        return i;
+      }
+    }
+    return -1;
+  }
+
+  public int lastIndexOf(String target) {
+    for (int i=size-1; i>=0; i--) {
+      if (array[i].equals(target)) {
+        return i;
+      }
+    }
+    return -1;
+  }
   
 }
