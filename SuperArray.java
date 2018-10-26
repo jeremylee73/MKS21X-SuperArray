@@ -4,12 +4,15 @@ public class SuperArray {
 
   public SuperArray() {
     array = new String[10];
-    size = 10;
   }
 
   public void clear() {
     array = new String[0];
     size = 0;
+  }
+
+  public int size() {
+    return size;
   }
 
   public boolean isEmpty() {
@@ -21,16 +24,20 @@ public class SuperArray {
 
   public boolean add(String a) {
     if (array[array.length-1]==null) {
-      array[size-1] = a;
+      array[size] = a;
+      size += 1;
       return true;
     }
+    resize();
+    array[size] = a;
+    size+=1;
     return false;
   }
 
   public String toString() {
     String ans = "[";
     for (int i=0; i<size-1;i++) {
-      ans = ans + array[i] + ",";
+      ans = ans + array[i] + ", ";
     }
     ans = ans + array[size-1] + "]";
     return ans;
@@ -39,7 +46,7 @@ public class SuperArray {
   public String toStringDebug() {
     String ans = "[";
     for (int i=0; i<array.length-1;i++) {
-      ans = ans + array[i] + ",";
+      ans = ans + array[i] + ", ";
     }
     ans = ans + array[array.length-1] + "]";
     return ans;
@@ -97,15 +104,21 @@ public class SuperArray {
   }
 
   public void add(int index, String a) {
-    String[] ans = new String[array.length];
-    for (int i=0; i<index; i++) {
-      ans[i] = array[i];
+    if (index >= 0 && index <= size) {
+      if (array[size-1] != null) {
+        resize();
+      }
+      String[] ans = new String[array.length];
+      for (int i=0; i<index; i++) {
+        ans[i] = array[i];
+      }
+      ans[index] = a;
+      for (int i=index+1; i<size; i++) {
+        ans[i] = array[i-1];
+      }
+      size += 1;
+      array = ans;
     }
-    ans[index] = a;
-    for (int i=index+1; i<size; i++) {
-      ans[i] = array[i-1];
-    }
-    array = ans;
   }
 
   public String remove(int index) {
@@ -118,6 +131,25 @@ public class SuperArray {
       ans[i] = array[i+1];
     }
     array = ans;
+    size -= 1;
     return original;
   }
+
+  public boolean remove(String target) {
+    String[] ans = new String[array.length];
+    boolean check = false;
+    for (int i=0; i<indexOf(target); i++) {
+      ans[i] = array[i];
+    }
+    for (int i=indexOf(target); i<size; i++) {
+      if (array[i].equals(target)) {
+        size -= 1;
+        check = true;
+      }
+      ans[i] = array[i+1];
+    }
+    array = ans;
+    return check;
+  }
+
 }
