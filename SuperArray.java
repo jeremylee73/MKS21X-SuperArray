@@ -6,6 +6,10 @@ public class SuperArray {
     array = new String[10];
   }
 
+  public SuperArray(int startingCapacity) {
+    array = new String[startingCapacity];
+  }
+
   public void clear() {
     array = new String[0];
     size = 0;
@@ -54,14 +58,14 @@ public class SuperArray {
 
   public String get(int i) {
     if (i < 0 || i >= size) {
-      return null;
+      throw new IndexOutOfBoundsException();
     }
     return array[i];
   }
 
   public String set(int i, String a) {
     if (i < 0 || i >= size) {
-      return null;
+      throw new IndexOutOfBoundsException();
     }
     String original = array[i];
     array[i] = a;
@@ -69,7 +73,7 @@ public class SuperArray {
   }
 
   private void resize() {
-    String[] newArray = new String[array.length*2];
+    String[] newArray = new String[(array.length*2) + 1];
     for (int i=0; i<size; i++) {
       newArray[i] = array[i];
     }
@@ -118,10 +122,15 @@ public class SuperArray {
       }
       size += 1;
       array = ans;
+    } else {
+      throw new IndexOutOfBoundsException();
     }
   }
 
   public String remove(int index) {
+    if (index < 0 || index >= size) {
+      throw new IndexOutOfBoundsException();
+    }
     String original = array[index];
     String[] ans = new String[array.length];
     for (int i=0; i<index; i++) {
