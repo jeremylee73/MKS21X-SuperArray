@@ -7,6 +7,9 @@ public class SuperArray {
   }
 
   public SuperArray(int startingCapacity) {
+    if (startingCapacity < 0) {
+      throw new IllegalArgumentException();
+    }
     array = new String[startingCapacity];
   }
 
@@ -27,15 +30,12 @@ public class SuperArray {
   }
 
   public boolean add(String a) {
-    if (array[array.length-1]==null) {
-      array[size] = a;
-      size += 1;
-      return true;
+    if (size() == array.length) {
+      resize();
     }
-    resize();
-    array[size] = a;
-    size+=1;
-    return false;
+    array[size()] = a;
+    size++;
+    return true;
   }
 
   public String toString() {
@@ -49,10 +49,13 @@ public class SuperArray {
 
   public String toStringDebug() {
     String ans = "[";
-    for (int i=0; i<array.length-1;i++) {
+    for (int i=0; i<array.length;i++) {
       ans = ans + array[i] + ", ";
     }
-    ans = ans + array[array.length-1] + "]";
+    if (!ans.equals("[")) {
+        ans = ans.substring(0, ans.length()-2);
+    }
+    ans += "]";
     return ans;
   }
 
@@ -109,19 +112,14 @@ public class SuperArray {
 
   public void add(int index, String a) {
     if (index >= 0 && index <= size) {
-      if (array[size-1] != null) {
+      if (size() == array.length) {
         resize();
       }
-      String[] ans = new String[array.length];
-      for (int i=0; i<index; i++) {
-        ans[i] = array[i];
+      for (int i=size()-1; i>=index; i--) {
+        array[i+1] = array[i];
       }
-      ans[index] = a;
-      for (int i=index+1; i<size; i++) {
-        ans[i] = array[i-1];
-      }
-      size += 1;
-      array = ans;
+      array[index] = a;
+      size++;
     } else {
       throw new IndexOutOfBoundsException();
     }
